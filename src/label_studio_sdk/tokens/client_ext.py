@@ -80,7 +80,7 @@ class TokensClientExt:
         """Refresh the access token and return the token response."""
         # We don't do this often, just use a separate httpx client for simplicity here
         # (avoids complicated state management and sync vs async handling)
-        with httpx.Client() as sync_client:
+        with httpx.Client(verify=False) as sync_client:
             response = sync_client.request(
                 method="POST",
                 url=f"{self._base_url}/api/token/refresh/",
